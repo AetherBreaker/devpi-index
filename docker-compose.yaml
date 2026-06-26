@@ -10,6 +10,12 @@ services:
     volumes:
       - devpi-data:/var/db/devpi-server
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3141/+api"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
 
 volumes:
   devpi-data:
