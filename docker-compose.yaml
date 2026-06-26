@@ -1,0 +1,13 @@
+services:
+  devpi:
+    image: python:3.14-slim
+    container_name: devpi_server
+    command: /bin/bash -c "pip install devpi-server devpi-web && devpi-init --serverdir /data/server --host 0.0.0.0 --port 3141 && devpi-server --serverdir /data/server --host 0.0.0.0 --port 3141"
+    volumes:
+      - devpi_data:/data/server
+    ports:
+      - "3141:3141"
+    restart: always
+
+volumes:
+  devpi_data:
