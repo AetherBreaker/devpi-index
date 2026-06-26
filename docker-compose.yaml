@@ -5,8 +5,10 @@ services:
       dockerfile: dockerfile
     image: devpi-index:latest
     container_name: devpi-server
-    ports:
-      - "3141:3141"
+    expose:
+      - "3141"
+    environment:
+      - SERVICE_FQDN_DEVPI_3141=pypi.sweetfiretobacco.com
     volumes:
       - devpi-data:/var/db/devpi-server
     restart: unless-stopped
